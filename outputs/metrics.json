@@ -1,0 +1,20 @@
+{
+  "category": {
+    "clean_macro_f1": 1.0,
+    "typos": 1.0,
+    "all_caps": 1.0,
+    "emoji_noise": 1.0,
+    "truncated": 1.0,
+    "greeting_wrapper": 1.0,
+    "no_spaces_punct": 1.0
+  },
+  "urgency": {
+    "clean_macro_f1": 0.863,
+    "typos": 0.791,
+    "all_caps": 0.863,
+    "emoji_noise": 0.863,
+    "truncated": 0.495,
+    "greeting_wrapper": 0.844,
+    "no_spaces_punct": 0.839
+  }
+}

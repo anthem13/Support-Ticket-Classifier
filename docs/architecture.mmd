@@ -1,0 +1,17 @@
+flowchart TB
+    subgraph DATA["Data"]
+        SYN["synthetic.py<br/>templated tickets"]
+        CSV["Real CSV (Kaggle)<br/>column mapping flags"]
+    end
+    SYN --> SPLIT["train.py<br/>stratified 80/20 split"]
+    CSV --> SPLIT
+    SPLIT --> M["TicketClassifier · 2 heads: category, urgency<br/>each = TF-IDF word 1–2 grams + char_wb 3–5 grams<br/>→ LogisticRegression, class_weight = balanced"]
+    M --> EV["Clean test set<br/>classification report"]
+    M --> ROB["perturb.py attacks<br/>typos · caps · emoji · truncation<br/>greeting wrapper · no spaces"]
+    EV --> MET["outputs/metrics.json"]
+    ROB --> MET
+    M --> SAVE[("models/ticket_clf.joblib")]
+    SAVE --> APP["app.py · Streamlit"]
+    APP --> PRED{"category confidence<br/>below 0.5 or empty?"}
+    PRED -->|"yes"| HUM["needs_human = true"]
+    PRED -->|"no"| AUTO["auto-route"]
